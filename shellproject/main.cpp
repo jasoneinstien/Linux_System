@@ -1,5 +1,6 @@
 #include "include.h"
 
+
 struct{
 	std::string username;
 	std::string password;
@@ -17,10 +18,6 @@ void cat(std::string filename){
 }
 
 
-void grep(std::string filename){
-	
-
-}
 
 
 void clear(){
@@ -30,7 +27,14 @@ void clear(){
 
 }
 
-void shell_loop(){
+std::string user_input_prompt(std::string username){
+	std::string user_input;
+	std::cout<<username<<"> ";
+	std::cin>>user_input;
+	return user_input;
+}
+
+void shell_loop(std::string username){
 	std::string user_input;
 	while(true){
 		if(user_input == "quit()" || user_input == "quit" ){
@@ -44,16 +48,23 @@ void shell_loop(){
 		}
 		else if (user_input == "clear"){
 			clear();
-			std::cout<<"> ";
-			std::cin>>user_input;
+			user_input =user_input_prompt(username);
 		}
 		else if(user_input == "pwd"){
-			std::cout<<"> ";
+			pwd();
+			std::cout<<username<<"> ";
 			std::cin>>user_input;
-			ls();	
+		}
+		else if (user_input == "rm"){
+			rm();
+			user_input = user_input_prompt(username);
+		}
+		else if (user_input == "awk"){
+			awk();
+			user_input = user_input_prompt(username);
 		}
 		else{
-			std::cout<<"> ";
+			std::cout<<username<<" > ";
 			std::cin>>user_input;
 		}
 	}
@@ -62,7 +73,9 @@ void shell_loop(){
 
 int main(int argv , char ** argc){
 	clear();
-	shell_login();
-	shell_loop();
+	std::string username = shell_login();
+	user_prop.username = username;
+	clear();
+	shell_loop(username);
 	return 0;
 }
