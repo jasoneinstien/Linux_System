@@ -5,4 +5,5 @@ To the mini linux system just type ./main in terminal/CMD
 Username: Admin
 Password: admin
 
-Finished Function: pwd , cd , touch , rm , cat , ls 
+Finished Function: pwd , cd , touch , rm , cat , ls , clear
+
