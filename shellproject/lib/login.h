@@ -13,6 +13,13 @@ bool password(){
 	}
 }
 
+void logout(){
+	std::cout<<"> ... ... ... logout ... ... ...";
+	std::cout<<std::endl;
+	 
+
+}
+
 std::string shell_login(){
 	std::cout<<"> User_name: ";
 	std::string username; 

@@ -29,13 +29,17 @@ void clear(){
 
 std::string user_input_prompt(std::string username){
 	std::string user_input;
-	std::cout<<username<<"> ";
+	std::cout<<username<<" > ";
 	std::cin>>user_input;
 	return user_input;
 }
 
 void shell_loop(std::string username){
 	std::string user_input;
+	char currentdirectory[1024];
+	getcwd(currentdirectory,1024);
+	strcat(currentdirectory , "/User/admin");
+	chdir(currentdirectory);
 	while(true){
 		if(user_input == "quit()" || user_input == "quit" ){
 			break;
@@ -52,7 +56,7 @@ void shell_loop(std::string username){
 		}
 		else if(user_input == "pwd"){
 			pwd();
-			std::cout<<username<<"> ";
+			std::cout<<username<<" > ";
 			std::cin>>user_input;
 		}
 		else if (user_input == "rm"){
@@ -61,6 +65,23 @@ void shell_loop(std::string username){
 		}
 		else if (user_input == "awk"){
 			awk();
+			user_input = user_input_prompt(username);
+		}
+		else if(user_input == "ls"){
+			ls();
+			user_input = user_input_prompt(username);
+		}
+		else if(user_input == "mkdir"){
+
+			mkdir();
+			user_input = user_input_prompt(username);
+		}
+		else if(user_input == "cd"){
+			cd();
+			user_input = user_input_prompt(username);
+		}
+		else if(user_input == "touch"){
+			touch();
 			user_input = user_input_prompt(username);
 		}
 		else{
@@ -77,5 +98,6 @@ int main(int argv , char ** argc){
 	user_prop.username = username;
 	clear();
 	shell_loop(username);
+	logout();
 	return 0;
 }
